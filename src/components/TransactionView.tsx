@@ -1,28 +1,11 @@
 import { useState, useCallback } from "react";
 
-import {
-  Box,
-  Typography,
-  TextField,
-  Button,
-  Dialog,
-  DialogTitle,
-  DialogContent,
-  DialogContentText,
-  DialogActions,
-  debounce,
-} from "@mui/material";
+import { Box, Typography, TextField, Button, Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions, debounce } from "@mui/material";
 import { useUserMessage } from "./UserMessageContext";
 import { useBankContext } from "./BankContext";
 import type { TransactionViewType, ViewType } from "../constants";
 
-const TransactionView = ({
-  view,
-  setView,
-}: {
-  view: TransactionViewType;
-  setView: (v: ViewType) => void;
-}) => {
+const TransactionView = ({ view, setView }: { view: TransactionViewType; setView: (v: ViewType) => void }) => {
   const { addTransaction, balance } = useBankContext();
   const { setMessage } = useUserMessage();
   const [amount, setAmount] = useState("");
@@ -30,7 +13,7 @@ const TransactionView = ({
 
   const handleAmountChange = useCallback(
     debounce((value: string) => setAmount(value), 100),
-    [],
+    []
   );
 
   const isValidAmount = () => {
@@ -45,18 +28,12 @@ const TransactionView = ({
       return;
     }
     if (view === "withdraw" && num > balance) {
-      setMessage(
-        `Insufficient balance. You only have $${balance.toFixed(2)} available.`,
-      );
+      setMessage(`Insufficient balance. You only have $${balance.toFixed(2)} available.`);
       return;
     }
     const result = addTransaction(num, view);
     if (result) {
-      setMessage(
-        `Thank you. $${num.toFixed(2)} has been ${
-          view === "deposit" ? "deposited to" : "withdrawn from"
-        } your account.`,
-      );
+      setMessage(`Thank you. $${num.toFixed(2)} has been ${view === "deposit" ? "deposited to" : "withdrawn from"} your account.`);
       setView("menu");
     }
   };
@@ -92,32 +69,18 @@ const TransactionView = ({
         fullWidth
         sx={{ mt: 2 }}
         onClick={handleSubmit}
-        disabled={
-          !isValidAmount() ||
-          (view === "withdraw" && parseFloat(amount) > balance)
-        }
+        disabled={!isValidAmount() || (view === "withdraw" && parseFloat(amount) > balance)}
       >
         Submit
       </Button>
-      <Button
-        variant="outlined"
-        fullWidth
-        sx={{ mt: 1 }}
-        onClick={handleCancelClick}
-      >
+      <Button variant="outlined" fullWidth sx={{ mt: 1 }} onClick={handleCancelClick}>
         Cancel
       </Button>
 
-      <Dialog
-        open={cancelConfirmOpen}
-        onClose={() => setCancelConfirmOpen(false)}
-      >
+      <Dialog open={cancelConfirmOpen} onClose={() => setCancelConfirmOpen(false)}>
         <DialogTitle>Cancel Transaction</DialogTitle>
         <DialogContent>
-          <DialogContentText>
-            You have entered an amount. Are you sure you want to cancel and
-            discard your input?
-          </DialogContentText>
+          <DialogContentText>You have entered an amount. Are you sure you want to cancel and discard your input?</DialogContentText>
         </DialogContent>
         <DialogActions>
           <Button onClick={() => setCancelConfirmOpen(false)}>No</Button>

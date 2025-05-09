@@ -1,12 +1,4 @@
-import {
-  Box,
-  Table,
-  TableHead,
-  TableRow,
-  TableCell,
-  TableBody,
-  Button,
-} from "@mui/material";
+import { Box, Table, TableHead, TableRow, TableCell, TableBody, Button } from "@mui/material";
 import { useBankContext } from "./BankContext";
 import type { ViewType } from "../constants";
 
@@ -32,12 +24,7 @@ const StatementView = ({ setView }: { setView: (v: ViewType) => void }) => {
           ))}
         </TableBody>
       </Table>
-      <Button
-        variant="contained"
-        fullWidth
-        sx={{ mt: 2 }}
-        onClick={() => setView("menu")}
-      >
+      <Button variant="contained" fullWidth sx={{ mt: 2 }} onClick={() => setView("menu")}>
         Back to Menu
       </Button>
     </Box>

@@ -1,22 +1,33 @@
 import { render, type RenderOptions } from "@testing-library/react";
 
-import { BankProvider } from "./components/BankContext";
-import { UserMessageProvider } from "./components/UserMessageContext";
+import { BankProvider, type BankContextType } from "./components/BankContext";
+import { UserMessageProvider, type UserMessageContextType } from "./components/UserMessageContext";
 import type { ReactElement, ReactNode } from "react";
 
-const AllProviders = ({ children }: { children: ReactNode }) => {
+const AllProviders = ({
+  children,
+  bankContextValue,
+  userMessageContextValue,
+}: {
+  children: ReactNode;
+  bankContextValue?: BankContextType;
+  userMessageContextValue?: UserMessageContextType;
+}) => {
   return (
-    <BankProvider>
-      <UserMessageProvider>{children}</UserMessageProvider>
+    <BankProvider value={bankContextValue}>
+      <UserMessageProvider value={userMessageContextValue}>{children}</UserMessageProvider>
     </BankProvider>
   );
 };
 
-const customRender = (ui: ReactElement, options: RenderOptions) =>
+type customRenderOptions = {
+  bankContextValue?: BankContextType;
+  userMessageContextValue?: UserMessageContextType;
+} & RenderOptions;
+
+const customRender = (ui: ReactElement, options: customRenderOptions) =>
   render(ui, {
-    wrapper: ({ children }) => (
-      <AllProviders {...options}>{children}</AllProviders>
-    ),
+    wrapper: ({ children }) => <AllProviders {...options}>{children}</AllProviders>,
     ...options,
   });
 

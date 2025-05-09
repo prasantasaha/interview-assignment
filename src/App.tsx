@@ -1,11 +1,5 @@
 import { useState } from "react";
-import {
-  Container,
-  Typography,
-  Paper,
-  ThemeProvider,
-  CssBaseline,
-} from "@mui/material";
+import { Container, Typography, Paper, ThemeProvider, CssBaseline } from "@mui/material";
 import MenuView from "./components/MenuView";
 import TransactionView from "./components/TransactionView";
 import StatementView from "./components/StatementView";
@@ -20,14 +14,12 @@ function AppContent() {
 
   return (
     <Container maxWidth="sm">
-      <Paper elevation={3} sx={{ p: 4, mt: 4 }}>
+      <Paper elevation={3} sx={{ padding: 4, marginTop: 4, borderRadius: 6 }}>
         <Typography variant="h4" gutterBottom>
           Welcome to AwesomeGIC Bank!
         </Typography>
         {view === "menu" && <MenuView setView={setView} />}
-        {(view === "deposit" || view === "withdraw") && (
-          <TransactionView view={view} setView={setView} />
-        )}
+        {(view === "deposit" || view === "withdraw") && <TransactionView view={view} setView={setView} />}
         {view === "statement" && <StatementView setView={setView} />}
         {view === "quit" && <QuitView setView={setView} />}
       </Paper>

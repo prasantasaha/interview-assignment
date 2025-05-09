@@ -19,25 +19,13 @@ const MenuView = ({ setView }: { setView: (v: ViewType) => void }) => {
       </Typography>
 
       <Stack sx={{ rowGap: 1 }}>
-        <Button
-          fullWidth
-          variant="contained"
-          onClick={() => setView("deposit")}
-        >
+        <Button fullWidth variant="contained" onClick={() => setView("deposit")}>
           Deposit
         </Button>
-        <Button
-          fullWidth
-          variant="contained"
-          onClick={() => setView("withdraw")}
-        >
+        <Button fullWidth variant="contained" onClick={() => setView("withdraw")}>
           Withdraw
         </Button>
-        <Button
-          fullWidth
-          variant="contained"
-          onClick={() => setView("statement")}
-        >
+        <Button fullWidth variant="contained" onClick={() => setView("statement")}>
           Print Statement
         </Button>
 

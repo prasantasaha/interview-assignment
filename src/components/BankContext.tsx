@@ -1,26 +1,23 @@
 import { createContext, useContext, useState, type ReactNode } from "react";
 import type { TransactionViewType } from "../constants";
 
-interface Transaction {
+export type Transaction = {
   date: string;
   amount: number;
   balance: number;
-}
+};
 
-interface BankContextType {
+export type BankContextType = {
   balance: number;
   transactions: Transaction[];
-  addTransaction: (
-    amount: number,
-    type: TransactionViewType,
-  ) => Transaction | undefined;
-}
+  addTransaction: (amount: number, type: TransactionViewType) => Transaction | undefined;
+};
 
 const BankContext = createContext<BankContextType | undefined>(undefined);
 
-export const BankProvider = ({ children }: { children: ReactNode }) => {
-  const [balance, setBalance] = useState(0);
-  const [transactions, setTransactions] = useState<Transaction[]>([]);
+export const BankProvider = ({ children, value }: { children: ReactNode; value?: BankContextType }) => {
+  const [balance, setBalance] = useState(value?.balance || 0);
+  const [transactions, setTransactions] = useState<Transaction[]>(value?.transactions ?? []);
 
   const addTransaction = (amount: number, type: TransactionViewType) => {
     if (!amount || amount <= 0) return;
@@ -37,11 +34,7 @@ export const BankProvider = ({ children }: { children: ReactNode }) => {
     return transaction;
   };
 
-  return (
-    <BankContext.Provider value={{ balance, transactions, addTransaction }}>
-      {children}
-    </BankContext.Provider>
-  );
+  return <BankContext.Provider value={value || { balance, transactions, addTransaction }}>{children}</BankContext.Provider>;
 };
 
 export const useBankContext = () => {

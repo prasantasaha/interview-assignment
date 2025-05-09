@@ -9,6 +9,9 @@ const theme = createTheme({
       main: "#dc004e",
     },
   },
+  typography: {
+    fontFamily: "Newsreader, serif",
+  },
 
   components: {
     MuiButton: {
