@@ -23,14 +23,14 @@ const TransactionView = ({ view, setView }: { view: TransactionViewType; setView
 
   const handleSubmit = () => {
     const num = parseFloat(amount);
-    if (!isValidAmount()) {
-      setMessage("Please enter a valid amount.");
-      return;
-    }
-    if (view === "withdraw" && num > balance) {
-      setMessage(`Insufficient balance. You only have $${balance.toFixed(2)} available.`);
-      return;
-    }
+    // if (!isValidAmount()) {
+    //   setMessage("Please enter a valid amount.");
+    //   return;
+    // }
+    // if (view === "withdraw" && num > balance) {
+    //   setMessage(`Insufficient balance. You only have $${balance.toFixed(2)} available.`);
+    //   return;
+    // }
     const result = addTransaction(num, view);
     if (result) {
       setMessage(`Thank you. $${num.toFixed(2)} has been ${view === "deposit" ? "deposited to" : "withdrawn from"} your account.`);

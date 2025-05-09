@@ -9,7 +9,7 @@ const UserMessageContext = createContext<UserMessageContextType | undefined>(und
 
 export const UserMessageProvider = ({ children, value }: { children: ReactNode; value?: UserMessageContextType }) => {
   const [message, setMessage] = useState(value?.message || "");
-  return <UserMessageContext.Provider value={{ message, setMessage }}>{children}</UserMessageContext.Provider>;
+  return <UserMessageContext.Provider value={{ message, setMessage: value?.setMessage ?? setMessage }}>{children}</UserMessageContext.Provider>;
 };
 
 export const useUserMessage = () => {
