@@ -82,6 +82,6 @@ describe("BankContext", () => {
     });
 
     expect(result.current).toBeInstanceOf(Error);
-    expect(result.current.message).toBe("useBank must be used within BankProvider");
+    expect((result.current as Error).message).toBe("useBank must be used within BankProvider");
   });
 });
