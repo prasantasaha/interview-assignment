@@ -19,6 +19,14 @@ describe("StatementView", () => {
     expect(getByText("Back to Menu")).toBeInTheDocument();
   });
 
+  it("renders a message when there are no transactions", () => {
+    const { getByText } = render(<StatementView setView={() => null} />, {
+      bankContextValue: { transactions: [], balance: 0, addTransaction: () => undefined },
+    });
+    expect(getByText("No records found.")).toBeInTheDocument();
+    expect(getByText("Back to Menu")).toBeInTheDocument();
+  });
+
   it("calls setView when the Back to Menu button is clicked", () => {
     const setViewMock = vi.fn();
     const { getByText } = render(<StatementView setView={setViewMock} />, {});

@@ -1,20 +1,29 @@
-import { useState, useCallback } from "react";
-
-import { Box, Typography, TextField, Button, Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions, debounce } from "@mui/material";
+import { useState } from "react";
+import {
+  Box,
+  Typography,
+  TextField,
+  Button,
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  DialogContentText,
+  DialogActions,
+  debounce,
+  InputAdornment,
+} from "@mui/material";
+import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
 import { useUserMessage } from "./UserMessageContext";
 import { useBankContext } from "./BankContext";
+import { useTheme } from "@mui/material/styles";
 import type { TransactionViewType, ViewType } from "../constants";
 
 const TransactionView = ({ view, setView }: { view: TransactionViewType; setView: (v: ViewType) => void }) => {
+  const theme = useTheme();
   const { addTransaction, balance } = useBankContext();
   const { setMessage } = useUserMessage();
   const [amount, setAmount] = useState("");
   const [cancelConfirmOpen, setCancelConfirmOpen] = useState(false);
-
-  const handleAmountChange = useCallback(
-    debounce((value: string) => setAmount(value), 100),
-    []
-  );
 
   const isValidAmount = () => {
     const num = parseFloat(amount);
@@ -23,14 +32,6 @@ const TransactionView = ({ view, setView }: { view: TransactionViewType; setView
 
   const handleSubmit = () => {
     const num = parseFloat(amount);
-    // if (!isValidAmount()) {
-    //   setMessage("Please enter a valid amount.");
-    //   return;
-    // }
-    // if (view === "withdraw" && num > balance) {
-    //   setMessage(`Insufficient balance. You only have $${balance.toFixed(2)} available.`);
-    //   return;
-    // }
     const result = addTransaction(num, view);
     if (result) {
       setMessage(`Thank you. $${num.toFixed(2)} has been ${view === "deposit" ? "deposited to" : "withdrawn from"} your account.`);
@@ -53,43 +54,64 @@ const TransactionView = ({ view, setView }: { view: TransactionViewType; setView
   };
 
   return (
-    <Box mt={2}>
-      <Typography variant="subtitle1" gutterBottom>
+    <Box mt={2} sx={{ maxWidth: 400, margin: "auto" }}>
+      <Typography variant="h5" gutterBottom sx={{ fontWeight: "bold", textAlign: "center", color: theme.palette.text.primary }}>
         Current Balance: ${balance.toFixed(2)}
       </Typography>
       <TextField
         fullWidth
         label={`Please enter amount to ${view}:`}
+        placeholder="Enter amount"
         defaultValue={amount}
-        onChange={(e) => handleAmountChange(e.target.value)}
+        onChange={debounce((event) => setAmount(event.target.value), 100)}
         type="number"
+        slotProps={{
+          input: {
+            startAdornment: (
+              <InputAdornment position="start">
+                <AttachMoneyIcon color="action" />
+              </InputAdornment>
+            ),
+          },
+        }}
+        sx={{ mt: 2, borderColor: theme.palette.divider }}
       />
       <Button
         variant="contained"
         fullWidth
-        sx={{ mt: 2 }}
+        sx={{ mt: 2, backgroundColor: view === "deposit" ? theme.palette.success.main : theme.palette.info.main }}
         onClick={handleSubmit}
         disabled={!isValidAmount() || (view === "withdraw" && parseFloat(amount) > balance)}
       >
         Submit
       </Button>
-      <Button variant="outlined" fullWidth sx={{ mt: 1 }} onClick={handleCancelClick}>
+      <Button
+        variant="outlined"
+        fullWidth
+        sx={{ mt: 1, color: theme.palette.error.main, borderColor: theme.palette.error.main }}
+        onClick={handleCancelClick}
+      >
         Cancel
       </Button>
 
       <Dialog open={cancelConfirmOpen} onClose={() => setCancelConfirmOpen(false)}>
-        <DialogTitle>Cancel Transaction</DialogTitle>
+        <DialogTitle sx={{ color: theme.palette.text.primary }}>Cancel Transaction</DialogTitle>
         <DialogContent>
-          <DialogContentText>You have entered an amount. Are you sure you want to cancel and discard your input?</DialogContentText>
+          <DialogContentText sx={{ color: theme.palette.text.secondary }}>
+            Are you sure you want to cancel this transaction? Any entered amount will be discarded.
+          </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button onClick={() => setCancelConfirmOpen(false)}>No</Button>
+          <Button onClick={() => setCancelConfirmOpen(false)} sx={{ color: theme.palette.info.main }}>
+            No
+          </Button>
           <Button
             onClick={() => {
               setCancelConfirmOpen(false);
               navigateToMenu();
             }}
             autoFocus
+            sx={{ color: theme.palette.error.main }}
           >
             Yes
           </Button>

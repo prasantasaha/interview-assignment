@@ -13,7 +13,7 @@ function AppContent() {
   const [view, setView] = useState<ViewType>("menu");
 
   return (
-    <Container maxWidth="sm">
+    <Container maxWidth="sm" sx={{ minWidth: { xs: 300, sm: 600 } }}>
       <Paper elevation={3} sx={{ padding: 4, marginTop: 4, borderRadius: 6 }}>
         <Typography variant="h4" gutterBottom>
           Welcome to AwesomeGIC Bank!

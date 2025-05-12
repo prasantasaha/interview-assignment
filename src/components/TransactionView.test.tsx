@@ -68,7 +68,7 @@ describe("TransactionView", () => {
     const cancelButton = getByRole("button", { name: /cancel/i });
     await userEvent.click(cancelButton, { delay: 500 });
 
-    expect(getByText(/are you sure you want to cancel and discard your input\?/i)).toBeInTheDocument();
+    expect(getByText(/are you sure you want to cancel this transaction\? any entered amount will be discarded/i)).toBeInTheDocument();
   });
 
   it("navigates to menu directly when cancel is clicked without input", async () => {

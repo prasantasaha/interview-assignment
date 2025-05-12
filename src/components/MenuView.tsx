@@ -1,14 +1,13 @@
 import { Box, Typography, Button } from "@mui/material";
 import { type ViewType } from "../constants";
-import { useUserMessage } from "./UserMessageContext";
 import { Stack } from "@mui/system";
 import UserMessage from "./UserMessage";
+import AccountBalanceWallet from "@mui/icons-material/AccountBalanceWallet";
+import Print from "@mui/icons-material/Print";
+import AttachMoney from "@mui/icons-material/AttachMoney";
 
 const MenuView = ({ setView }: { setView: (v: ViewType) => void }) => {
-  const { setMessage } = useUserMessage();
-
   const handleQuit = () => {
-    setMessage("Thank you for banking with AwesomeGIC Bank.\nHave a nice day!");
     setView("quit");
   };
 
@@ -19,13 +18,13 @@ const MenuView = ({ setView }: { setView: (v: ViewType) => void }) => {
       </Typography>
 
       <Stack sx={{ rowGap: 1 }}>
-        <Button fullWidth variant="contained" onClick={() => setView("deposit")}>
+        <Button fullWidth variant="contained" onClick={() => setView("deposit")} startIcon={<AttachMoney />}>
           Deposit
         </Button>
-        <Button fullWidth variant="contained" onClick={() => setView("withdraw")}>
+        <Button fullWidth variant="contained" onClick={() => setView("withdraw")} startIcon={<AccountBalanceWallet />}>
           Withdraw
         </Button>
-        <Button fullWidth variant="contained" onClick={() => setView("statement")}>
+        <Button fullWidth variant="contained" onClick={() => setView("statement")} startIcon={<Print />}>
           Print Statement
         </Button>
 
