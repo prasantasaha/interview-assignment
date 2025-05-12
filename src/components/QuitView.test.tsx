@@ -1,3 +1,4 @@
+import userEvent from "@testing-library/user-event";
 import { render } from "../testUtil";
 import QuitView from "./QuitView";
 import { describe, expect, it, vi } from "vitest";
@@ -18,10 +19,10 @@ describe("QuitView", () => {
     getByText(/back to home/i);
   });
 
-  it("calls setView when the Back to home is clicked", () => {
+  it("calls setView when the Back to home is clicked", async () => {
     const setViewMock = vi.fn();
     const { getByText } = render(<QuitView setView={setViewMock} />, {});
-    getByText(/back to home/i).click();
+    await userEvent.click(getByText(/back to home/i));
     expect(setViewMock).toHaveBeenCalledWith("menu");
   });
 });

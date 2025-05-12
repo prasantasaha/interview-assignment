@@ -7,14 +7,15 @@ type ConfirmationDialogProps = {
   onClose: () => void;
   onConfirm: () => void;
   message: string;
+  title: string;
 };
 
-const ConfirmationDialog: FC<ConfirmationDialogProps> = ({ open, onClose, onConfirm, message }) => {
+const ConfirmationDialog: FC<ConfirmationDialogProps> = ({ open, onClose, onConfirm, message, title }) => {
   const theme = useTheme();
 
   return (
     <Dialog open={open} onClose={onClose}>
-      <DialogTitle sx={{ color: theme.palette.text.primary }}>Confirm Action</DialogTitle>
+      <DialogTitle sx={{ color: theme.palette.text.primary }}>{title}</DialogTitle>
       <DialogContent>
         <DialogContentText sx={{ color: theme.palette.text.secondary }}>{message}</DialogContentText>
       </DialogContent>

@@ -101,6 +101,7 @@ const TransactionView = ({ view, setView }: { view: TransactionViewType; setView
         onClose={() => setCancelConfirmOpen(false)}
         onConfirm={navigateToMenu}
         message="Are you sure you want to cancel this transaction? Any entered amount will be discarded."
+        title="Cancel Transaction"
       />
     </Box>
   );

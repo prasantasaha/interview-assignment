@@ -16,10 +16,10 @@ describe("MenuView", () => {
     expect(getByRole("button", { name: /quit/i })).toBeInTheDocument();
   });
 
-  it("calls setView when a menu item is clicked", () => {
+  it("calls setView when a menu item is clicked", async () => {
     const setViewMock = vi.fn();
     const { getByRole } = render(<MenuView setView={setViewMock} />, {});
-    getByRole("button", { name: /withdraw/i }).click();
+    await userEvent.click(getByRole("button", { name: /withdraw/i }));
     expect(setViewMock).toHaveBeenCalledWith("withdraw");
   });
 

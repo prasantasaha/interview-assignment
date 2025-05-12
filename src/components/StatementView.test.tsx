@@ -1,3 +1,4 @@
+import userEvent from "@testing-library/user-event";
 import { render } from "../testUtil";
 import type { Transaction } from "./BankContext";
 import StatementView from "./StatementView";
@@ -27,10 +28,11 @@ describe("StatementView", () => {
     expect(getByText("Back to Menu")).toBeInTheDocument();
   });
 
-  it("calls setView when the Back to Menu button is clicked", () => {
+  it("calls setView when the Back to Menu button is clicked", async () => {
     const setViewMock = vi.fn();
     const { getByText } = render(<StatementView setView={setViewMock} />, {});
-    getByText(/back to menu/i).click();
+
+    await userEvent.click(getByText(/back to menu/i));
     expect(setViewMock).toHaveBeenCalledWith("menu");
   });
 });
