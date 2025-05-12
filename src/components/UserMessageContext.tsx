@@ -1,15 +1,32 @@
-import React, { createContext, useContext, useState, type ReactNode } from "react";
+import { createContext, useContext, useState, type ReactNode } from "react";
+import { type AlertProps } from "@mui/material";
+
+type SeverityType = AlertProps["severity"];
+
+export type UserMessageState = {
+  message: string;
+  severity?: SeverityType;
+};
 
 export type UserMessageContextType = {
-  message: string;
-  setMessage: React.Dispatch<React.SetStateAction<string>>;
+  userMessage: UserMessageState;
+  setUserMessage: (newMessage: UserMessageState) => void;
 };
 
 const UserMessageContext = createContext<UserMessageContextType | undefined>(undefined);
 
 export const UserMessageProvider = ({ children, value }: { children: ReactNode; value?: UserMessageContextType }) => {
-  const [message, setMessage] = useState(value?.message || "");
-  return <UserMessageContext.Provider value={{ message, setMessage: value?.setMessage ?? setMessage }}>{children}</UserMessageContext.Provider>;
+  const defaultValue = value ?? {
+    userMessage: { message: "", severity: "info" },
+  };
+
+  const [userMessage, setUserMessage] = useState<UserMessageState>(defaultValue.userMessage);
+
+  return (
+    <UserMessageContext.Provider value={{ userMessage, setUserMessage: value?.setUserMessage ?? setUserMessage }}>
+      {children}
+    </UserMessageContext.Provider>
+  );
 };
 
 export const useUserMessage = () => {

@@ -1,6 +1,6 @@
 import { describe, it, expect } from "vitest";
 import { renderHook, act } from "@testing-library/react";
-import { BankProvider, useBankContext } from "./BankContext";
+import { BankProvider, formatDate, useBankContext } from "./BankContext";
 import type { TransactionViewType } from "../constants";
 
 describe("BankContext", () => {
@@ -83,5 +83,13 @@ describe("BankContext", () => {
 
     expect(result.current).toBeInstanceOf(Error);
     expect((result.current as Error).message).toBe("useBank must be used within BankProvider");
+  });
+
+  describe("formatDate", () => {
+    it("formats a date correctly in", () => {
+      const date = new Date("2023-01-01T15:30:45");
+      const formattedDate = formatDate(date);
+      expect(formattedDate).toBe("1 Jan 2023 03:30:45 pm");
+    });
   });
 });

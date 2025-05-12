@@ -27,7 +27,7 @@ describe("TransactionView", () => {
     const transactions: Transaction[] = [{ date: "2023-10-01", amount: 100, balance: 50 }];
     const { getByRole, getByLabelText } = render(<TransactionView view="withdraw" setView={() => null} />, {
       bankContextValue: { transactions, balance: 50, addTransaction: () => undefined },
-      userMessageContextValue: { message: "", setMessage: setMessageMock },
+      userMessageContextValue: { userMessage: { message: "" }, setUserMessage: setMessageMock },
     });
 
     const input = getByLabelText(/please enter\s*amount to withdraw:/i);
@@ -45,7 +45,7 @@ describe("TransactionView", () => {
     const setMessageMock = vi.fn();
     const { getByRole, getByLabelText } = render(<TransactionView view="deposit" setView={setViewMock} />, {
       bankContextValue: { transactions: [], balance: 1000, addTransaction: addTransactionMock },
-      userMessageContextValue: { message: "", setMessage: setMessageMock },
+      userMessageContextValue: { userMessage: { message: "" }, setUserMessage: setMessageMock },
     });
 
     const input = getByLabelText(/please enter\s*amount to deposit:/i);
@@ -55,7 +55,10 @@ describe("TransactionView", () => {
     await userEvent.click(submitButton, { delay: 500 });
 
     expect(addTransactionMock).toHaveBeenCalledWith(200, "deposit");
-    expect(setMessageMock).toHaveBeenCalledWith("Thank you. $200.00 has been deposited to your account.");
+    expect(setMessageMock).toHaveBeenCalledWith({
+      message: "Thank you. $200.00 has been deposited to your account.",
+      severity: "success",
+    });
     expect(setViewMock).toHaveBeenCalledWith("menu");
   });
 

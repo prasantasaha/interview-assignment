@@ -1,9 +1,18 @@
 import { Box, Table, TableHead, TableRow, TableCell, TableBody, Button, Typography } from "@mui/material";
 import { useBankContext } from "./BankContext";
 import type { ViewType } from "../constants";
+import { useUserMessage } from "./UserMessageContext";
+import { useCallback } from "react";
 
 const StatementView = ({ setView }: { setView: (v: ViewType) => void }) => {
   const { transactions } = useBankContext();
+  const { setUserMessage } = useUserMessage();
+
+  const handleBackToMenu = useCallback(() => {
+    setView("menu");
+    setUserMessage({ message: "" });
+  }, [setUserMessage, setView]);
+
   return (
     <Box mt={2}>
       {transactions.length === 0 ? (
@@ -30,7 +39,7 @@ const StatementView = ({ setView }: { setView: (v: ViewType) => void }) => {
           </TableBody>
         </Table>
       )}
-      <Button variant="contained" fullWidth sx={{ mt: 2 }} onClick={() => setView("menu")}>
+      <Button variant="contained" fullWidth sx={{ mt: 2 }} onClick={handleBackToMenu}>
         Back to Menu
       </Button>
     </Box>

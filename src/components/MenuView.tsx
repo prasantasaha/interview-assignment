@@ -5,11 +5,16 @@ import UserMessage from "./UserMessage";
 import AccountBalanceWallet from "@mui/icons-material/AccountBalanceWallet";
 import Print from "@mui/icons-material/Print";
 import AttachMoney from "@mui/icons-material/AttachMoney";
+import { useUserMessage } from "./UserMessageContext";
+import { useCallback } from "react";
 
 const MenuView = ({ setView }: { setView: (v: ViewType) => void }) => {
-  const handleQuit = () => {
+  const { setUserMessage } = useUserMessage();
+
+  const handleQuit = useCallback(() => {
     setView("quit");
-  };
+    setUserMessage({ message: "" });
+  }, [setView, setUserMessage]);
 
   return (
     <Box mt={2}>

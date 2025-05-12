@@ -9,13 +9,13 @@ describe("UserMessage", () => {
 
   it("displays the correct message", () => {
     const message = "Welcome to the bank!";
-    render(<UserMessage />, { userMessageContextValue: { message, setMessage: () => {} } });
+    render(<UserMessage />, { userMessageContextValue: { userMessage: { message }, setUserMessage: () => {} } });
     expect(screen.getByText(message)).toBeInTheDocument();
   });
 
   it("updates the message when setMessage is called", () => {
-    const setMessage = vi.fn();
-    render(<UserMessage />, { userMessageContextValue: { message: "Initial message", setMessage } });
-    expect(setMessage).not.toHaveBeenCalled();
+    const setUserMessage = vi.fn();
+    render(<UserMessage />, { userMessageContextValue: { userMessage: { message: "Initial message" }, setUserMessage } });
+    expect(setUserMessage).not.toHaveBeenCalled();
   });
 });
