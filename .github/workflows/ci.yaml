@@ -35,7 +35,7 @@ jobs:
         id: read
         run: |
           NODE_VERSION=$(jq -r '.engines.node // "18"' package.json | tr -d '>=<^~ ')
-          PNPM_VERSION=$(jq -r '.engines.pnpm // "8"' package.json | tr -d '>=<^~ ')
+          PNPM_VERSION=$(jq -r '.engines.pnpm // "10"' package.json | tr -d '>=<^~ ')
           echo "node=$NODE_VERSION" >> $GITHUB_OUTPUT
           echo "pnpm=$PNPM_VERSION" >> $GITHUB_OUTPUT
 
@@ -58,7 +58,7 @@ jobs:
       - name: Setup pnpm
         uses: pnpm/action-setup@v2
         with:
-          version: ${{ needs.setup.outputs.node }}
+          version: ${{ needs.setup.outputs.pnpm }}
 
       - name: Execute Checks
         run: |
