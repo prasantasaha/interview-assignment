@@ -20,8 +20,8 @@ A simple banking application built with React, TypeScript, and Vite. This app al
 
 ### Prerequisites
 
-- Node.js (v16 or higher)
-- pnpm
+- Node.js (v18 or higher)
+- pnpm (v10 or higher)
 
 ### Installation
 
@@ -31,6 +31,9 @@ A simple banking application built with React, TypeScript, and Vite. This app al
    cd bank-app
    ```
 2. Install dependencies:
+
+   [Download and Install pnpm](https://pnpm.io/installation)
+
    ```bash
    pnpm install
    ```
@@ -43,6 +46,8 @@ Start the development server:
 pnpm dev
 ```
 
+This will start the development server locally at `http://localhost:3000`
+
 ### Running Tests
 
 Run the test suite:
@@ -50,12 +55,3 @@ Run the test suite:
 ```bash
 pnpm test
 ```
-
-## Project Structure
-
-- `src/components`: React components.
-- `src/constants.ts`: Shared constants.
-- `src/context`: Context API for state management.
-- `src/tests`: Unit and integration tests.
-- `public/`: Static assets.
-- `vite.config.ts`: Vite configuration file.
