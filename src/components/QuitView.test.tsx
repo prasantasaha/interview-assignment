@@ -9,9 +9,7 @@ describe("QuitView", () => {
   });
 
   it("displays the correct message", () => {
-    const { getByText } = render(<QuitView setView={() => null} />, {
-      userMessageContextValue: { message: "Thank you for banking with AwesomeGIC Bank.\nHave a nice day!", setMessage: () => {} },
-    });
+    const { getByText } = render(<QuitView setView={() => null} />, {});
     getByText(/thank you for banking/i);
   });
   it("renders the Back to Home button", () => {
