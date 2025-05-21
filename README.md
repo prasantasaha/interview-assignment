@@ -27,7 +27,7 @@ A simple banking application built with React, TypeScript, and Vite. This app al
 1. Clone the repository:
    ```bash
    git clone https://github.com/prasantasaha/interview-assignment.git
-   cd bank-app
+   cd interview-assignment
    ```
 2. Install dependencies:
 
