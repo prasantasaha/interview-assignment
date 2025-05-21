@@ -1,7 +1,7 @@
 import { describe, it, expect } from "vitest";
 import { renderHook, act } from "../testUtil";
 import { BankProvider, formatDate, useBankContext } from "./BankContext";
-import type { TransactionViewType } from "../constants";
+import type { TransactionViewType } from "../types";
 
 describe("BankContext", () => {
   it("provides default values when no initial value is provided", () => {
@@ -89,7 +89,7 @@ describe("BankContext", () => {
     it("formats a date correctly in", () => {
       const date = new Date("2023-01-01T15:30:45");
       const formattedDate = formatDate(date);
-      expect(formattedDate).toBe("1 Jan 2023 03:30:45 pm");
+      expect(formattedDate).toBe("1 Jan 2023 03:30:45PM");
     });
   });
 });

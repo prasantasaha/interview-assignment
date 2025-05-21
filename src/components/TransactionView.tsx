@@ -5,7 +5,7 @@ import { useUserMessage } from "./UserMessageContext";
 import { useBankContext } from "./BankContext";
 import { useTheme } from "@mui/material/styles";
 import ConfirmationDialog from "./ConfirmationDialog";
-import type { TransactionViewType, ViewType } from "../constants";
+import type { TransactionViewType, ViewType } from "../types";
 
 const TransactionView = ({ view, setView }: { view: TransactionViewType; setView: (v: ViewType) => void }) => {
   const theme = useTheme();

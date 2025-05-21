@@ -1,5 +1,5 @@
 import { Button, Typography } from "@mui/material";
-import type { ViewType } from "../constants";
+import type { ViewType } from "../types";
 import { Stack } from "@mui/system";
 
 const QuitView = ({ setView }: { setView: (v: ViewType) => void }) => {

@@ -1,6 +1,6 @@
 import { Box, Table, TableHead, TableRow, TableCell, TableBody, Button, Typography } from "@mui/material";
 import { useBankContext } from "./BankContext";
-import type { ViewType } from "../constants";
+import type { ViewType } from "../types";
 import { useUserMessage } from "./UserMessageContext";
 import { useCallback } from "react";
 

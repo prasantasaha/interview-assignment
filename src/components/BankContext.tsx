@@ -1,5 +1,6 @@
 import { createContext, useContext, useState, type ReactNode } from "react";
-import type { TransactionViewType } from "../constants";
+import type { TransactionViewType } from "../types";
+import { format } from "date-fns";
 
 export type Transaction = {
   date: string;
@@ -16,17 +17,7 @@ export type BankContextType = {
 const BankContext = createContext<BankContextType | undefined>(undefined);
 
 export const formatDate = (date: Date) => {
-  return date
-    .toLocaleString("en-SG", {
-      day: "numeric",
-      month: "short",
-      year: "numeric",
-      hour: "2-digit",
-      minute: "2-digit",
-      second: "2-digit",
-      hour12: true,
-    })
-    .replace(",", "");
+  return format(date, "d LLL yyyy hh:mm:ssa");
 };
 
 export const BankProvider = ({ children, value }: { children: ReactNode; value?: BankContextType }) => {

@@ -6,7 +6,7 @@ import StatementView from "./components/StatementView";
 import QuitView from "./components/QuitView";
 import { BankProvider } from "./components/BankContext";
 import { UserMessageProvider } from "./components/UserMessageContext";
-import type { ViewType } from "./constants";
+import type { ViewType } from "./types";
 import theme from "./theme";
 
 function AppContent() {

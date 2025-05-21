@@ -1,5 +1,5 @@
 import { Box, Typography, Button } from "@mui/material";
-import { type ViewType } from "../constants";
+import { type ViewType } from "../types";
 import { Stack } from "@mui/system";
 import UserMessage from "./UserMessage";
 import AccountBalanceWallet from "@mui/icons-material/AccountBalanceWallet";

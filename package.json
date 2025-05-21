@@ -15,7 +15,9 @@
     "format:check": "prettier --check .",
     "preview": "vite preview",
     "test": "vitest run --coverage",
-    "typecheck": "tsc --noEmit"
+    "test:watch": "vitest --watch",
+    "typecheck": "tsc --noEmit",
+    "validate": "pnpm lint && pnpm typecheck && pnpm test"
   },
   "dependencies": {
     "@emotion/react": "^11.14.0",
@@ -23,6 +25,7 @@
     "@mui/icons-material": "^7.1.0",
     "@mui/material": "^7.1.0",
     "@mui/system": "^7.1.0",
+    "date-fns": "^4.1.0",
     "lodash": "^4.17.21",
     "react": "^19.1.0",
     "react-dom": "^19.1.0"
