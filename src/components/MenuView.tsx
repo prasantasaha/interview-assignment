@@ -1,5 +1,5 @@
 import { Box, Typography, Button } from "@mui/material";
-import { type ViewType } from "../types";
+import { type ViewComponent } from "../types";
 import { Stack } from "@mui/system";
 import UserMessage from "./UserMessage";
 import AccountBalanceWallet from "@mui/icons-material/AccountBalanceWallet";
@@ -8,7 +8,7 @@ import AttachMoney from "@mui/icons-material/AttachMoney";
 import { useUserMessage } from "./UserMessageContext";
 import { useCallback } from "react";
 
-const MenuView = ({ setView }: { setView: (v: ViewType) => void }) => {
+const MenuView = ({ setView }: ViewComponent) => {
   const { setUserMessage } = useUserMessage();
 
   const handleQuit = useCallback(() => {

@@ -12,16 +12,21 @@ import theme from "./theme";
 function AppContent() {
   const [view, setView] = useState<ViewType>("menu");
 
+  const views = {
+    menu: <MenuView setView={setView} />,
+    deposit: <TransactionView view="deposit" setView={setView} />,
+    withdraw: <TransactionView view="withdraw" setView={setView} />,
+    statement: <StatementView setView={setView} />,
+    quit: <QuitView setView={setView} />,
+  };
+
   return (
-    <Container maxWidth="sm" sx={{ minWidth: { xs: 300, sm: 600 } }}>
+    <Container data-testid="app-root" maxWidth="sm" sx={{ minWidth: { xs: 300, sm: 600 } }}>
       <Paper elevation={3} sx={{ padding: 4, marginTop: 4, borderRadius: 6 }}>
         <Typography variant="h4" gutterBottom>
           Welcome to AwesomeGIC Bank!
         </Typography>
-        {view === "menu" && <MenuView setView={setView} />}
-        {(view === "deposit" || view === "withdraw") && <TransactionView view={view} setView={setView} />}
-        {view === "statement" && <StatementView setView={setView} />}
-        {view === "quit" && <QuitView setView={setView} />}
+        {views[view] || null}
       </Paper>
     </Container>
   );
