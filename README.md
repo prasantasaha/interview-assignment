@@ -8,7 +8,6 @@ A simple banking application built with React, TypeScript, and Vite. This app al
 - Displays current balance.
 - Validates input for transactions.
 - Confirmation dialog for canceling transactions.
-- Error handling for insufficient balance.
 
 ## Tech Stack
 
