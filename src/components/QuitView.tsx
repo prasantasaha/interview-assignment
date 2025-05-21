@@ -1,8 +1,8 @@
 import { Button, Typography } from "@mui/material";
-import type { ViewType } from "../types";
+import type { ViewComponent } from "../types";
 import { Stack } from "@mui/system";
 
-const QuitView = ({ setView }: { setView: (v: ViewType) => void }) => {
+const QuitView = ({ setView }: ViewComponent) => {
   const handleBackToHome = () => {
     setView("menu");
   };

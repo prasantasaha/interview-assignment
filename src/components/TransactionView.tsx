@@ -5,9 +5,9 @@ import { useUserMessage } from "./UserMessageContext";
 import { useBankContext } from "./BankContext";
 import { useTheme } from "@mui/material/styles";
 import ConfirmationDialog from "./ConfirmationDialog";
-import type { TransactionViewType, ViewType } from "../types";
+import type { TransactionComponent } from "../types";
 
-const TransactionView = ({ view, setView }: { view: TransactionViewType; setView: (v: ViewType) => void }) => {
+const TransactionView = ({ view, setView }: TransactionComponent) => {
   const theme = useTheme();
   const { addTransaction, balance } = useBankContext();
   const { setUserMessage } = useUserMessage();
