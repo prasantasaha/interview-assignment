@@ -13,6 +13,14 @@ const StatementView = ({ setView }: ViewComponent) => {
     setUserMessage({ message: "" });
   }, [setUserMessage, setView]);
 
+  const formatNumber = (num: number) => {
+    return num.toLocaleString(undefined, {
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2,
+      
+    });
+  };
+
   return (
     <Box sx={{ marginTop: 2 }}>
       {transactions.length === 0 ? (
@@ -52,8 +60,8 @@ const StatementView = ({ setView }: ViewComponent) => {
               {transactions.map((t, idx) => (
                 <TableRow key={idx}>
                   <TableCell>{t.date}</TableCell>
-                  <TableCell>{t.amount.toFixed(2)}</TableCell>
-                  <TableCell>{t.balance.toFixed(2)}</TableCell>
+                  <TableCell data-testid={`transaction-amount-${idx}`}>{formatNumber(t.amount)}</TableCell>
+                  <TableCell data-testid={`transaction-balance-${idx}`}>{formatNumber(t.balance)}</TableCell>
                 </TableRow>
               ))}
             </TableBody>
