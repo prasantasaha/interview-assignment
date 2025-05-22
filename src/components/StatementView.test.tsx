@@ -10,13 +10,15 @@ describe("StatementView", () => {
   });
 
   it("renders a list of transactions", () => {
-    const transactions: Transaction[] = [{ date: "2023-10-01", amount: 100, balance: 1000 }];
-    const { getByText } = render(<StatementView setView={() => null} />, {
+    const transactions: Transaction[] = [{ date: "2023-10-01", amount: 1000, balance: 1000 }];
+    const { getByText, getByTestId } = render(<StatementView setView={() => null} />, {
       bankContextValue: { transactions, balance: 1150, addTransaction: () => undefined },
     });
     expect(getByText("2023-10-01")).toBeInTheDocument();
-    expect(getByText("100.00")).toBeInTheDocument();
-    expect(getByText("1000.00")).toBeInTheDocument();
+    // expect(getByText("2,000.00")).toBeInTheDocument();
+    // expect(getByText("1,000.00")).toBeInTheDocument();
+    expect(getByTestId("transaction-amount-0")).toHaveTextContent("1,000.00");
+    expect(getByTestId("transaction-balance-0")).toHaveTextContent("1,000.00");
     expect(getByText("Back to Menu")).toBeInTheDocument();
   });
 
