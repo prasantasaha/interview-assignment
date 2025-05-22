@@ -17,7 +17,6 @@ const StatementView = ({ setView }: ViewComponent) => {
     return num.toLocaleString(undefined, {
       minimumFractionDigits: 2,
       maximumFractionDigits: 2,
-      
     });
   };
 
